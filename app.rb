@@ -10,7 +10,7 @@ require_relative "./models/user.rb"
 
 redis = Redis.new(url: "redis://redistogo:86b2fe34c1932e19a382104bc32260aa@dory.redistogo.com:10094/")
 
-get '/' do
+get '/home' do
     erb(:home)
 end
 
@@ -33,7 +33,7 @@ post '/signup' do
         redis.hset(params[:username],"active", true)
         redis.save()
 
-        redirect "/"
+        redirect "/home"
     else 
         if((params[:password] != params[:pw_confirm]))
             flash[:notice] = newUser.errors.full_messages.join("\r\n") + " Passwords do not match. Please try again."
