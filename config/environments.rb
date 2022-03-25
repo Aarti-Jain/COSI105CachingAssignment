@@ -1,5 +1,5 @@
 configure :production, :development do
-    db = URI.parse(ENV['REDISTOGO_URL'] || 'redis://redistogo:86b2fe34c1932e19a382104bc32260aa@dory.redistogo.com:10094/')
+    db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost:5432')
 
     ActiveRecord::Base.establish_connection(
         :adapter => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
